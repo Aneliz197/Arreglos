@@ -79,13 +79,6 @@ public class PedidoDAO {
 
     public List<Pedido> listarTodos() throws SQLException {
         String sql = """
-            SELECT p.*, (c.nombre || ' ' || c.apellido) AS nombre_cli
-            FROM Pedido p
-            JOIN Cliente c ON c.id_cliente = p.fk_id_cliente
-            ORDER BY p.fecha_pedido DESC
-            """;
-        // MySQL no soporta '||', usamos CONCAT
-        sql = """
             SELECT p.*, CONCAT(c.nombre, ' ', c.apellido) AS nombre_cli
             FROM Pedido p
             JOIN Cliente c ON c.id_cliente = p.fk_id_cliente

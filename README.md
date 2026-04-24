@@ -1,14 +1,15 @@
 # Repostería Rosato
 
 Aplicación de escritorio JavaFX (FXML) para la gestión de la repostería.
-Este scaffolding cubre el **Módulo 1 (Autenticación)** y la **base del
-Módulo 2 (Clientes y Pedidos)**.
+Este scaffolding cubre el **Módulo 1 (Autenticación)** y el
+**Módulo 2 completo (Clientes y Pedidos: 2.1 Listado, 2.2 Nuevo pedido,
+2.3 Confirmación, 2.4 Listado de pedidos)**.
 
 ## Stack
 
 - Java 17 + JavaFX 21 + FXML
 - Maven
-- MySQL 8 + JDBC (`mysql-connector-j`)
+- **SQL Server** + JDBC (`mssql-jdbc`)
 - BCrypt (`jbcrypt`) para hash de contraseñas
 - JUnit 5
 
@@ -41,7 +42,8 @@ Módulo 2 (Clientes y Pedidos)**.
 | 1.1 Login           | `Login.fxml`            | `LoginController`                 |
 | 1.2 Registro        | `Registro.fxml`         | `RegistroController`              |
 | 2.1 Listado clientes| `ListadoClientes.fxml`  | `ListadoClientesController`       |
-| 2.2 Nuevo pedido    | `NuevoPedido.fxml`      | `NuevoPedidoController` (stub)    |
+| 2.2 Nuevo pedido    | `NuevoPedido.fxml`      | `NuevoPedidoController`           |
+| 2.3 Confirmación    | `ConfirmacionPedido.fxml` | `ConfirmacionPedidoController`  |
 | 2.4 Listado pedidos | `ListadoPedidos.fxml`   | `ListadoPedidosController`        |
 | Dashboard cliente   | `DashboardCliente.fxml` | `DashboardClienteController`      |
 | Dashboard empleado  | `DashboardEmpleado.fxml`| `DashboardEmpleadoController`     |
@@ -53,9 +55,14 @@ sobre esta base.
 
 ### 1. Base de datos
 
+Con **SQL Server** (local o contenedor). Ejemplo con `sqlcmd`:
+
 ```bash
-mysql -u root -p < sql/schema_modulos_1_2.sql
+sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulos_1_2.sql
 ```
+
+O copiar el contenido de `sql/schema_modulos_1_2.sql` y ejecutarlo
+desde SQL Server Management Studio / Azure Data Studio.
 
 ### 2. Configurar la conexión
 
@@ -63,9 +70,9 @@ Edita `src/main/resources/com/rosato/config.properties` o exporta
 variables de entorno:
 
 ```bash
-export ROSATO_DB_URL="jdbc:mysql://localhost:3306/reposteria_rosato?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
-export ROSATO_DB_USER="root"
-export ROSATO_DB_PASSWORD="tu_clave"
+export ROSATO_DB_URL="jdbc:sqlserver://localhost:1433;databaseName=reposteria_rosato;encrypt=false;trustServerCertificate=true"
+export ROSATO_DB_USER="sa"
+export ROSATO_DB_PASSWORD="TuClave!"
 ```
 
 ### 3. Crear el administrador
@@ -99,13 +106,13 @@ mvn -q test
 
 ## Cambiar de motor de base de datos
 
-`config.properties` apunta a MySQL por defecto. Para usar SQL Server o
-PostgreSQL sustituye el driver en `pom.xml` y el JDBC URL:
+El proyecto usa **SQL Server** por defecto. Para cambiar:
 
-- **SQL Server:** `com.microsoft.sqlserver:mssql-jdbc`,
-  URL `jdbc:sqlserver://HOST;databaseName=reposteria_rosato;encrypt=false`.
-- **PostgreSQL:** `org.postgresql:postgresql`,
-  URL `jdbc:postgresql://HOST:5432/reposteria_rosato`.
-
-El esquema SQL usa sintaxis MySQL (`AUTO_INCREMENT`, `BOOLEAN`,
-`CURRENT_TIMESTAMP`, `CONCAT`). Para otros motores habrá que adaptarlo.
+- **MySQL:** sustituir driver por `com.mysql:mysql-connector-j`,
+  URL `jdbc:mysql://HOST:3306/reposteria_rosato?useSSL=false&serverTimezone=UTC`
+  y adaptar el esquema (`IDENTITY` → `AUTO_INCREMENT`, `BIT` → `BOOLEAN`,
+  `SYSDATETIME()` → `CURRENT_TIMESTAMP`, `NVARCHAR(MAX)` → `TEXT`).
+- **PostgreSQL:** driver `org.postgresql:postgresql`,
+  URL `jdbc:postgresql://HOST:5432/reposteria_rosato`,
+  y adaptar el esquema a tipos PostgreSQL (`SERIAL`, `BOOLEAN`,
+  `TIMESTAMP`, etc.).

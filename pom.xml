@@ -33,11 +33,11 @@
             <version>${javafx.version}</version>
         </dependency>
 
-        <!-- MySQL JDBC por defecto. Cambia por sqlserver/postgresql si corresponde. -->
+        <!-- SQL Server JDBC. Cambia por mysql-connector-j / postgresql si corresponde. -->
         <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
-            <version>8.3.0</version>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>12.6.1.jre11</version>
         </dependency>
 
         <!-- BCrypt para hash de contraseñas -->
