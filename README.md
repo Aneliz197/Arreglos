@@ -20,6 +20,11 @@ Este scaffolding cubre:
   `Pendiente → En ruta → Entregada / Fallida`, y cobro del saldo final
   (método + referencia) que registra el `Pago` y cambia el estado del
   pedido a `Entregado` en una sola transacción.
+- **Módulo 6 (Máquinas y Mantenimiento)** — inventario de máquinas con
+  alerta de revisión vencida / próxima, historial de mantenimientos
+  (preventivo / correctivo) y registro que en una transacción
+  inserta el mantenimiento y actualiza `estado` y `proxima_revision`
+  de la máquina.
 
 ## Stack
 
@@ -73,10 +78,14 @@ Este scaffolding cubre:
 | 5.1 Agenda entregas | `AgendaEntregas.fxml`      | `AgendaEntregasController`      |
 | 5.2 Asignar repart. | `AsignarRepartidor.fxml`   | `AsignarRepartidorController`   |
 | 5.3 Entregar/cobrar | `EntregarYCobrar.fxml`     | `EntregarYCobrarController`     |
+| 6.1 Máquinas        | `ListadoMaquinas.fxml`     | `ListadoMaquinasController`     |
+| 6.2 Editar máquina  | `EditarMaquina.fxml`       | `EditarMaquinaController`       |
+| 6.3 Mantenimientos  | `ListadoMantenimientos.fxml` | `ListadoMantenimientosController` |
+| 6.4 Nuevo manten.   | `NuevoMantenimiento.fxml`  | `NuevoMantenimientoController`  |
 | Dashboard cliente   | `DashboardCliente.fxml` | `DashboardClienteController`      |
 | Dashboard empleado  | `DashboardEmpleado.fxml`| `DashboardEmpleadoController`     |
 
-El resto de pantallas de la especificación (Módulos 6–10) se construirán
+El resto de pantallas de la especificación (Módulos 7–10) se construirán
 sobre esta base.
 
 ## Puesta en marcha
@@ -90,6 +99,7 @@ sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulos_1_2.sql
 sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulo_4.sql
 sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulo_3.sql
 sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulo_5.sql
+sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulo_6.sql
 ```
 
 O copiar el contenido de `sql/schema_modulos_1_2.sql` y ejecutarlo
