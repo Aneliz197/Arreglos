@@ -20,6 +20,9 @@ public class DashboardEmpleadoController {
     @FXML private void onClientes()     { ir("ListadoClientes.fxml"); }
     @FXML private void onPedidos()      { ir("ListadoPedidos.fxml"); }
     @FXML private void onNuevoPedido()  { ir("NuevoPedido.fxml"); }
+    @FXML private void onInventario()   { ir("ListadoIngredientes.fxml"); }
+    @FXML private void onProveedores()  { ir("ListadoProveedores.fxml"); }
+    @FXML private void onCompras()      { ir("ListadoCompras.fxml"); }
 
     @FXML
     private void onCerrarSesion() {

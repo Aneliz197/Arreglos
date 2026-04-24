@@ -1,9 +1,15 @@
 # Repostería Rosato
 
 Aplicación de escritorio JavaFX (FXML) para la gestión de la repostería.
-Este scaffolding cubre el **Módulo 1 (Autenticación)** y el
-**Módulo 2 completo (Clientes y Pedidos: 2.1 Listado, 2.2 Nuevo pedido,
-2.3 Confirmación, 2.4 Listado de pedidos)**.
+Este scaffolding cubre:
+
+- **Módulo 1 (Autenticación)** — login, registro, bloqueo por intentos.
+- **Módulo 2 (Clientes y Pedidos)** — listado de clientes, nuevo pedido con
+  cálculo de precio/tiempo y validaciones, confirmación (transacción de
+  adelanto 50 %), listado de pedidos.
+- **Módulo 4 (Inventario y Compras)** — ingredientes con alerta de stock
+  bajo, proveedores y registro de compras con actualización de stock y
+  costo promedio ponderado en transacción.
 
 ## Stack
 
@@ -45,10 +51,16 @@ Este scaffolding cubre el **Módulo 1 (Autenticación)** y el
 | 2.2 Nuevo pedido    | `NuevoPedido.fxml`      | `NuevoPedidoController`           |
 | 2.3 Confirmación    | `ConfirmacionPedido.fxml` | `ConfirmacionPedidoController`  |
 | 2.4 Listado pedidos | `ListadoPedidos.fxml`   | `ListadoPedidosController`        |
+| 4.1 Inventario      | `ListadoIngredientes.fxml` | `ListadoIngredientesController` |
+| 4.2 Editar ingrediente | `EditarIngrediente.fxml` | `EditarIngredienteController` |
+| 4.3 Proveedores     | `ListadoProveedores.fxml`  | `ListadoProveedoresController`  |
+| 4.4 Editar proveedor| `EditarProveedor.fxml`     | `EditarProveedorController`     |
+| 4.5 Compras         | `ListadoCompras.fxml`      | `ListadoComprasController`      |
+| 4.6 Nueva compra    | `NuevaCompra.fxml`         | `NuevaCompraController`         |
 | Dashboard cliente   | `DashboardCliente.fxml` | `DashboardClienteController`      |
 | Dashboard empleado  | `DashboardEmpleado.fxml`| `DashboardEmpleadoController`     |
 
-El resto de pantallas de la especificación (Módulos 3 a 10) se construirán
+El resto de pantallas de la especificación (Módulos 3, 5–10) se construirán
 sobre esta base.
 
 ## Puesta en marcha
@@ -59,6 +71,7 @@ Con **SQL Server** (local o contenedor). Ejemplo con `sqlcmd`:
 
 ```bash
 sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulos_1_2.sql
+sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulo_4.sql
 ```
 
 O copiar el contenido de `sql/schema_modulos_1_2.sql` y ejecutarlo
