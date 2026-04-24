@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.rosato.controlador.ListadoControlSanitarioController"
+            prefWidth="1180" prefHeight="620" styleClass="root">
+    <top>
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <padding><Insets top="14" right="20" bottom="12" left="20"/></padding>
+            <Label text="Control sanitario" styleClass="titulo"/>
+            <HBox HBox.hgrow="ALWAYS"/>
+            <Button text="+ Nuevo"  styleClass="btn-principal"  onAction="#onNuevo"/>
+            <Button text="Refrescar" styleClass="btn-secundario" onAction="#onRefrescar"/>
+            <Button text="Volver"    styleClass="btn-secundario" onAction="#onVolver"/>
+        </HBox>
+    </top>
+    <center>
+        <VBox spacing="10">
+            <padding><Insets top="6" right="20" bottom="20" left="20"/></padding>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Desde:"/><DatePicker fx:id="dpDesde"/>
+                <Label text="Hasta:"/><DatePicker fx:id="dpHasta"/>
+                <Label text="Empleado:"/><ComboBox fx:id="cbEmpleado" prefWidth="240"/>
+                <Button text="Buscar" styleClass="btn-principal" onAction="#onBuscar"/>
+                <Button text="Todos empleados" styleClass="btn-secundario" onAction="#onLimpiarEmp"/>
+            </HBox>
+            <TableView fx:id="tblControles" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colFecha"    text="Fecha"    prefWidth="110"/>
+                    <TableColumn fx:id="colEmpleado" text="Empleado" prefWidth="220"/>
+                    <TableColumn fx:id="colArea"     text="Área"     prefWidth="120"/>
+                    <TableColumn fx:id="colUni"      text="Uniforme"  prefWidth="80"/>
+                    <TableColumn fx:id="colManos"    text="Manos"     prefWidth="70"/>
+                    <TableColumn fx:id="colRed"      text="Redecilla" prefWidth="90"/>
+                    <TableColumn fx:id="colGuantes"  text="Guantes"   prefWidth="80"/>
+                    <TableColumn fx:id="colUnas"     text="Uñas"      prefWidth="70"/>
+                    <TableColumn fx:id="colSalud"    text="Salud"     prefWidth="70"/>
+                    <TableColumn fx:id="colResumen"  text="%"         prefWidth="80"/>
+                    <TableColumn fx:id="colObs"      text="Observaciones" prefWidth="200"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>

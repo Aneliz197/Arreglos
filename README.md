@@ -29,6 +29,12 @@ Este scaffolding cubre:
   empleados (BCrypt, cédula/usuario únicos, filtros por área y
   estado) y capacitaciones con gestión de asistentes
   (asistencia, calificación, observaciones).
+- **Módulo 8 (Higiene / Control sanitario)** — revisiones de
+  higiene por área con checklist dinámico que calcula
+  porcentaje de cumplimiento y estado (OK / Observado /
+  No conforme), y control sanitario por empleado (uniforme,
+  manos, redecilla, guantes, uñas, salud) con historial
+  filtrable por fecha y empleado.
 
 ## Stack
 
@@ -90,10 +96,15 @@ Este scaffolding cubre:
 | 7.2 Editar empleado | `EditarEmpleado.fxml`      | `EditarEmpleadoController`      |
 | 7.3 Capacitaciones  | `ListadoCapacitaciones.fxml` | `ListadoCapacitacionesController` |
 | 7.4 Editar capacit. | `EditarCapacitacion.fxml`  | `EditarCapacitacionController`  |
+| 8.0 Panel higiene   | `PanelHigiene.fxml`        | `PanelHigieneController`        |
+| 8.1 Revisiones      | `ListadoRevisionesHigiene.fxml` | `ListadoRevisionesHigieneController` |
+| 8.2 Editar revisión | `EditarRevisionHigiene.fxml` | `EditarRevisionHigieneController` |
+| 8.3 Control sanit.  | `ListadoControlSanitario.fxml` | `ListadoControlSanitarioController` |
+| 8.4 Nuevo control   | `NuevoControlSanitario.fxml`   | `NuevoControlSanitarioController`   |
 | Dashboard cliente   | `DashboardCliente.fxml` | `DashboardClienteController`      |
 | Dashboard empleado  | `DashboardEmpleado.fxml`| `DashboardEmpleadoController`     |
 
-El resto de pantallas de la especificación (Módulos 8–10) se construirán
+El resto de pantallas de la especificación (Módulos 9–10) se construirán
 sobre esta base.
 
 ## Puesta en marcha
@@ -109,6 +120,7 @@ sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulo_3.sql
 sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulo_5.sql
 sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulo_6.sql
 sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulo_7.sql
+sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulo_8.sql
 ```
 
 O copiar el contenido de `sql/schema_modulos_1_2.sql` y ejecutarlo

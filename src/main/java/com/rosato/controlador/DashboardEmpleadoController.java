@@ -29,6 +29,7 @@ public class DashboardEmpleadoController {
     @FXML private void onMaquinas()     { ir("ListadoMaquinas.fxml"); }
     @FXML private void onEmpleados()    { ir("ListadoEmpleados.fxml"); }
     @FXML private void onCapacitaciones() { ir("ListadoCapacitaciones.fxml"); }
+    @FXML private void onHigiene()        { ir("PanelHigiene.fxml"); }
 
     @FXML
     private void onCerrarSesion() {
