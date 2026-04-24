@@ -31,11 +31,12 @@
                 <Button text="Clientes" styleClass="btn-principal" onAction="#onClientes"/>
                 <Button text="Pedidos" styleClass="btn-principal" onAction="#onPedidos"/>
                 <Button text="Nuevo pedido" styleClass="btn-secundario" onAction="#onNuevoPedido"/>
-                <Button text="Inventario"  styleClass="btn-principal"  onAction="#onInventario"/>
-                <Button text="Proveedores" styleClass="btn-principal"  onAction="#onProveedores"/>
-                <Button text="Compras"     styleClass="btn-principal"  onAction="#onCompras"/>
-                <Button text="Planificación (pendiente)" styleClass="btn-secundario" disable="true"/>
-                <Button text="Dashboard (pendiente)"    styleClass="btn-secundario" disable="true"/>
+                <Button text="Inventario"    styleClass="btn-principal" onAction="#onInventario"/>
+                <Button text="Proveedores"   styleClass="btn-principal" onAction="#onProveedores"/>
+                <Button text="Compras"       styleClass="btn-principal" onAction="#onCompras"/>
+                <Button text="Recetas"       styleClass="btn-principal" onAction="#onRecetas"/>
+                <Button text="Plan del día"  styleClass="btn-principal" onAction="#onPlanDia"/>
+                <Button text="Dashboard (pendiente)" styleClass="btn-secundario" disable="true"/>
             </FlowPane>
         </VBox>
     </center>

@@ -54,6 +54,58 @@ public class PedidoDAO {
         }
     }
 
+    /**
+     * Marca el pedido como 'Listo' descontando el stock de cada ingrediente
+     * según sus recetas.  Todo en una sola transacción; si algún insumo no
+     * alcanza se lanza SQLException y se hace rollback.
+     *
+     * @param consumos mapa id_ingrediente → cantidad a descontar
+     */
+    public void marcarListoConDescuento(int idPedido,
+                                        java.util.Map<Integer, java.math.BigDecimal> consumos)
+            throws SQLException {
+        try (Connection c = ConexionBD.get()) {
+            c.setAutoCommit(false);
+            try {
+                // Validar stock suficiente antes de descontar
+                try (PreparedStatement ps = c.prepareStatement(
+                        "SELECT nombre, stock_actual FROM Ingrediente WHERE id_ingrediente = ?")) {
+                    for (var e : consumos.entrySet()) {
+                        ps.setInt(1, e.getKey());
+                        try (ResultSet rs = ps.executeQuery()) {
+                            if (!rs.next()) throw new SQLException("Ingrediente no encontrado: " + e.getKey());
+                            java.math.BigDecimal stock = rs.getBigDecimal("stock_actual");
+                            if (stock.compareTo(e.getValue()) < 0) {
+                                throw new SQLException("Stock insuficiente de '"
+                                        + rs.getString("nombre") + "' (requiere "
+                                        + e.getValue() + ", hay " + stock + ")");
+                            }
+                        }
+                    }
+                }
+                try (PreparedStatement ps = c.prepareStatement(
+                        "UPDATE Ingrediente SET stock_actual = stock_actual - ? WHERE id_ingrediente = ?")) {
+                    for (var e : consumos.entrySet()) {
+                        ps.setBigDecimal(1, e.getValue());
+                        ps.setInt(2, e.getKey());
+                        ps.addBatch();
+                    }
+                    ps.executeBatch();
+                }
+                try (PreparedStatement ps = c.prepareStatement(
+                        "UPDATE Pedido SET estado = 'Listo' WHERE id_pedido = ?")) {
+                    ps.setInt(1, idPedido);
+                    ps.executeUpdate();
+                }
+                c.commit();
+            } catch (Exception ex) {
+                c.rollback();
+                if (ex instanceof SQLException se) throw se;
+                throw new SQLException(ex);
+            }
+        }
+    }
+
     /** Cuenta pedidos del cliente que solapan dentro de la misma hora de entrega. */
     public int contarPedidosEnMismaHora(int idCliente, LocalDateTime fechaHora) throws SQLException {
         String sql = """
@@ -89,6 +141,34 @@ public class PedidoDAO {
              PreparedStatement ps = c.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) out.add(mapear(rs));
+        }
+        return out;
+    }
+
+    /**
+     * Lista pedidos con fecha de entrega en el día indicado y en los
+     * estados dados (ej. 'Confirmado', 'En producción').
+     */
+    public List<Pedido> listarPorFechaEntrega(java.time.LocalDate fecha, String... estados) throws SQLException {
+        String inClause = estados.length == 0 ? "" :
+                " AND p.estado IN (" + "?,".repeat(estados.length).replaceAll(",$", "") + ")";
+        String sql = """
+            SELECT p.*, CONCAT(c.nombre, ' ', c.apellido) AS nombre_cli
+            FROM Pedido p
+            JOIN Cliente c ON c.id_cliente = p.fk_id_cliente
+            WHERE p.fecha_entrega >= ? AND p.fecha_entrega < ?
+            """ + inClause + " ORDER BY p.fecha_entrega";
+        java.time.LocalDateTime desde = fecha.atStartOfDay();
+        java.time.LocalDateTime hasta = fecha.plusDays(1).atStartOfDay();
+        List<Pedido> out = new ArrayList<>();
+        try (Connection c = ConexionBD.get();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setTimestamp(1, Timestamp.valueOf(desde));
+            ps.setTimestamp(2, Timestamp.valueOf(hasta));
+            for (int i = 0; i < estados.length; i++) ps.setString(3 + i, estados[i]);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) out.add(mapear(rs));
+            }
         }
         return out;
     }

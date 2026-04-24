@@ -10,6 +10,11 @@ Este scaffolding cubre:
 - **Módulo 4 (Inventario y Compras)** — ingredientes con alerta de stock
   bajo, proveedores y registro de compras con actualización de stock y
   costo promedio ponderado en transacción.
+- **Módulo 3 (Planificación y Producción)** — recetas por tipo de producto
+  (ingredientes por libra), plan del día que consolida los pedidos
+  confirmados y compara requerimientos contra stock, y transiciones de
+  estado del pedido (`Confirmado → En producción → Listo`) con
+  descuento automático de ingredientes al marcar listo.
 
 ## Stack
 
@@ -57,10 +62,13 @@ Este scaffolding cubre:
 | 4.4 Editar proveedor| `EditarProveedor.fxml`     | `EditarProveedorController`     |
 | 4.5 Compras         | `ListadoCompras.fxml`      | `ListadoComprasController`      |
 | 4.6 Nueva compra    | `NuevaCompra.fxml`         | `NuevaCompraController`         |
+| 3.1 Recetas         | `ListadoRecetas.fxml`      | `ListadoRecetasController`      |
+| 3.2 Editar receta   | `EditarReceta.fxml`        | `EditarRecetaController`        |
+| 3.3 Plan del día    | `PlanDelDia.fxml`          | `PlanDelDiaController`          |
 | Dashboard cliente   | `DashboardCliente.fxml` | `DashboardClienteController`      |
 | Dashboard empleado  | `DashboardEmpleado.fxml`| `DashboardEmpleadoController`     |
 
-El resto de pantallas de la especificación (Módulos 3, 5–10) se construirán
+El resto de pantallas de la especificación (Módulos 5–10) se construirán
 sobre esta base.
 
 ## Puesta en marcha
@@ -72,6 +80,7 @@ Con **SQL Server** (local o contenedor). Ejemplo con `sqlcmd`:
 ```bash
 sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulos_1_2.sql
 sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulo_4.sql
+sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulo_3.sql
 ```
 
 O copiar el contenido de `sql/schema_modulos_1_2.sql` y ejecutarlo
