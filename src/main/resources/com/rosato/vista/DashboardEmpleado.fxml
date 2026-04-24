@@ -38,6 +38,8 @@
                 <Button text="Plan del día"  styleClass="btn-principal" onAction="#onPlanDia"/>
                 <Button text="Entregas"      styleClass="btn-principal" onAction="#onEntregas"/>
                 <Button text="Máquinas"      styleClass="btn-principal" onAction="#onMaquinas"/>
+                <Button text="Empleados"     styleClass="btn-principal" onAction="#onEmpleados"/>
+                <Button text="Capacitaciones" styleClass="btn-principal" onAction="#onCapacitaciones"/>
                 <Button text="Dashboard (pendiente)" styleClass="btn-secundario" disable="true"/>
             </FlowPane>
         </VBox>

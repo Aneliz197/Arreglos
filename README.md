@@ -25,6 +25,10 @@ Este scaffolding cubre:
   (preventivo / correctivo) y registro que en una transacción
   inserta el mantenimiento y actualiza `estado` y `proxima_revision`
   de la máquina.
+- **Módulo 7 (Empleados y Capacitación)** — CRUD completo de
+  empleados (BCrypt, cédula/usuario únicos, filtros por área y
+  estado) y capacitaciones con gestión de asistentes
+  (asistencia, calificación, observaciones).
 
 ## Stack
 
@@ -82,10 +86,14 @@ Este scaffolding cubre:
 | 6.2 Editar máquina  | `EditarMaquina.fxml`       | `EditarMaquinaController`       |
 | 6.3 Mantenimientos  | `ListadoMantenimientos.fxml` | `ListadoMantenimientosController` |
 | 6.4 Nuevo manten.   | `NuevoMantenimiento.fxml`  | `NuevoMantenimientoController`  |
+| 7.1 Empleados       | `ListadoEmpleados.fxml`    | `ListadoEmpleadosController`    |
+| 7.2 Editar empleado | `EditarEmpleado.fxml`      | `EditarEmpleadoController`      |
+| 7.3 Capacitaciones  | `ListadoCapacitaciones.fxml` | `ListadoCapacitacionesController` |
+| 7.4 Editar capacit. | `EditarCapacitacion.fxml`  | `EditarCapacitacionController`  |
 | Dashboard cliente   | `DashboardCliente.fxml` | `DashboardClienteController`      |
 | Dashboard empleado  | `DashboardEmpleado.fxml`| `DashboardEmpleadoController`     |
 
-El resto de pantallas de la especificación (Módulos 7–10) se construirán
+El resto de pantallas de la especificación (Módulos 8–10) se construirán
 sobre esta base.
 
 ## Puesta en marcha
@@ -100,6 +108,7 @@ sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulo_4.sql
 sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulo_3.sql
 sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulo_5.sql
 sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulo_6.sql
+sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulo_7.sql
 ```
 
 O copiar el contenido de `sql/schema_modulos_1_2.sql` y ejecutarlo

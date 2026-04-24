@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.rosato.controlador.ListadoCapacitacionesController"
+            prefWidth="1000" prefHeight="620" styleClass="root">
+
+    <top>
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <padding><Insets top="14" right="20" bottom="12" left="20"/></padding>
+            <Label text="Capacitaciones" styleClass="titulo"/>
+            <HBox HBox.hgrow="ALWAYS"/>
+            <Button text="+ Nueva"   styleClass="btn-principal"  onAction="#onNueva"/>
+            <Button text="Editar"    styleClass="btn-secundario" onAction="#onEditar"/>
+            <Button text="Refrescar" styleClass="btn-secundario" onAction="#onRefrescar"/>
+            <Button text="Volver"    styleClass="btn-secundario" onAction="#onVolver"/>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="10">
+            <padding><Insets top="6" right="20" bottom="20" left="20"/></padding>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Desde:"/><DatePicker fx:id="dpDesde"/>
+                <Label text="Hasta:"/><DatePicker fx:id="dpHasta"/>
+                <Button text="Buscar" styleClass="btn-principal" onAction="#onBuscar"/>
+            </HBox>
+
+            <TableView fx:id="tblCaps" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colId"         text="ID"         prefWidth="60"/>
+                    <TableColumn fx:id="colFecha"      text="Fecha"      prefWidth="120"/>
+                    <TableColumn fx:id="colTitulo"     text="Título"     prefWidth="280"/>
+                    <TableColumn fx:id="colInstructor" text="Instructor" prefWidth="180"/>
+                    <TableColumn fx:id="colHoras"      text="Horas"      prefWidth="80"/>
+                    <TableColumn fx:id="colUbic"       text="Ubicación"  prefWidth="160"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>
