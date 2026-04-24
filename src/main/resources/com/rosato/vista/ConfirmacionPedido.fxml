@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.rosato.controlador.ConfirmacionPedidoController"
+            prefWidth="720" prefHeight="620" styleClass="root">
+
+    <top>
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <padding><Insets top="14" right="20" bottom="12" left="20"/></padding>
+            <Label text="Confirmación de pedido" styleClass="titulo"/>
+            <HBox HBox.hgrow="ALWAYS"/>
+            <Button text="Volver a editar" styleClass="btn-secundario" onAction="#onVolver"/>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="14">
+            <padding><Insets top="6" right="20" bottom="20" left="20"/></padding>
+
+            <VBox spacing="6" styleClass="tarjeta">
+                <Label text="Resumen" styleClass="subtitulo"/>
+                <Separator/>
+                <Label fx:id="lblEncabezado"/>
+                <Label fx:id="lblCliente"/>
+                <Label fx:id="lblProducto"/>
+                <Label fx:id="lblFechas"/>
+                <Separator/>
+                <Label fx:id="lblSubtotal"/>
+                <Label fx:id="lblAdelanto"/>
+                <Label fx:id="lblSaldo"/>
+                <Label fx:id="lblEstado"/>
+            </VBox>
+
+            <VBox spacing="6" styleClass="tarjeta">
+                <Label text="Viabilidad" styleClass="subtitulo"/>
+                <Label fx:id="lblIngredientes"  text="✅ Disponibilidad de ingredientes (no validado, módulo 4 pendiente)"/>
+                <Label fx:id="lblTiempo"        text="⏱️ Tiempo suficiente"/>
+                <Label fx:id="lblDecorador"     text="🧑‍🍳 Decorador disponible"/>
+                <Label fx:id="lblFresas"        text="" visible="false" managed="false"/>
+            </VBox>
+
+            <Label fx:id="lblMensaje" styleClass="error" visible="false" managed="false" wrapText="true"/>
+
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Button text="Volver a editar" styleClass="btn-secundario" onAction="#onVolver"/>
+                <Button text="Confirmar pedido" styleClass="btn-principal" onAction="#onConfirmar"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

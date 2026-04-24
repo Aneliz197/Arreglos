@@ -2,14 +2,23 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.rosato.controlador.NuevoPedidoController"
-            prefWidth="720" prefHeight="480" styleClass="root">
+            prefWidth="820" prefHeight="720" styleClass="root">
+
     <top>
         <HBox spacing="12" alignment="CENTER_LEFT">
             <padding><Insets top="14" right="20" bottom="12" left="20"/></padding>
@@ -18,11 +27,90 @@
             <Button text="Volver" styleClass="btn-secundario" onAction="#onVolver"/>
         </HBox>
     </top>
+
     <center>
-        <VBox spacing="10" alignment="CENTER">
-            <padding><Insets top="10" right="20" bottom="20" left="20"/></padding>
-            <Label text="Pantalla 2.2 (pendiente de implementar)." styleClass="subtitulo"/>
-            <Label text="Aquí se construirán las secciones Cliente / Producto / Resumen." styleClass="subtitulo"/>
-        </VBox>
+        <ScrollPane fitToWidth="true" styleClass="root">
+            <VBox spacing="14">
+                <padding><Insets top="6" right="20" bottom="20" left="20"/></padding>
+
+                <!-- Sección Cliente -->
+                <VBox spacing="10" styleClass="tarjeta">
+                    <Label text="Cliente" styleClass="subtitulo"/>
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <TextField fx:id="txtBuscarCliente"
+                                   promptText="Buscar por nombre, apellido, teléfono o cédula"
+                                   prefWidth="360"/>
+                        <Button text="Buscar" styleClass="btn-principal" onAction="#onBuscarCliente"/>
+                        <Button text="+ Cliente nuevo" styleClass="btn-secundario" onAction="#onNuevoClienteRapido"/>
+                    </HBox>
+                    <Label fx:id="lblClienteSeleccionado" styleClass="subtitulo"
+                           text="Ningún cliente seleccionado"/>
+                    <VBox fx:id="boxResultadosCliente" spacing="6"/>
+                </VBox>
+
+                <!-- Sección Producto -->
+                <VBox spacing="10" styleClass="tarjeta">
+                    <Label text="Producto" styleClass="subtitulo"/>
+
+                    <GridPane hgap="12" vgap="8">
+                        <Label text="Tipo *" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <ChoiceBox fx:id="cbTipo" GridPane.columnIndex="1" GridPane.rowIndex="0"
+                                   prefWidth="220"/>
+
+                        <Label text="Cantidad (lb) *" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <TextField fx:id="txtLibras" promptText="0.5 a 20"
+                                   GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                        <Label text="Diseño *" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <TextArea fx:id="txtDiseno" prefRowCount="3"
+                                  GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                        <Label text="Fecha entrega *" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <DatePicker fx:id="dpFechaEntrega"
+                                    GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                        <Label text="Hora entrega * (9-19)" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                        <TextField fx:id="txtHoraEntrega" promptText="HH:MM"
+                                   GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+                        <Label text="Observaciones" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                        <TextArea fx:id="txtObservaciones" prefRowCount="2"
+                                  GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                    </GridPane>
+
+                    <HBox spacing="20">
+                        <CheckBox fx:id="chkComplejo" text="¿Diseño complejo? (+25%)"/>
+                        <CheckBox fx:id="chkFresas" text="Contiene fresas"/>
+                    </HBox>
+
+                    <HBox fx:id="boxColaborador" spacing="10" visible="false" managed="false">
+                        <Label text="Colaborador externo:"/>
+                        <TextField fx:id="txtColaborador" prefWidth="280"/>
+                    </HBox>
+                </VBox>
+
+                <!-- Resumen -->
+                <VBox spacing="6" styleClass="tarjeta">
+                    <Label text="Resumen" styleClass="subtitulo"/>
+                    <Separator/>
+                    <Label fx:id="lblPrecioBase"    text="Precio base:      RD$ 0.00"/>
+                    <Label fx:id="lblCostoDiseno"   text="Costo diseño:     RD$ 0.00"/>
+                    <Label fx:id="lblSubtotal"      text="Subtotal:         RD$ 0.00"/>
+                    <Label fx:id="lblAdelanto"      text="Adelanto 50%:     RD$ 0.00"/>
+                    <Label fx:id="lblSaldo"         text="Saldo pendiente:  RD$ 0.00"/>
+                    <Label fx:id="lblTiempo"        text="Tiempo estimado:  0 h"/>
+                    <Label fx:id="lblAdvertencia"   styleClass="error" visible="false" managed="false"/>
+                </VBox>
+
+                <Label fx:id="lblMensaje" styleClass="error" visible="false" managed="false" wrapText="true"/>
+
+                <HBox spacing="10" alignment="CENTER_RIGHT">
+                    <Button text="Recalcular" styleClass="btn-secundario" onAction="#onRecalcular"/>
+                    <Button text="Guardar borrador" styleClass="btn-secundario" onAction="#onGuardarBorrador"/>
+                    <Button text="Solicitar confirmación" styleClass="btn-principal"
+                            onAction="#onSolicitarConfirmacion"/>
+                </HBox>
+            </VBox>
+        </ScrollPane>
     </center>
 </BorderPane>
