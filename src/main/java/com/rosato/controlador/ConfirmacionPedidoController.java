@@ -2,10 +2,12 @@ package com.rosato.controlador;
 
 import com.rosato.dao.ClienteDAO;
 import com.rosato.dao.DetallePedidoDAO;
+import com.rosato.dao.EntregaDAO;
 import com.rosato.dao.PagoDAO;
 import com.rosato.dao.PedidoDAO;
 import com.rosato.modelo.Cliente;
 import com.rosato.modelo.DetallePedido;
+import com.rosato.modelo.Entrega;
 import com.rosato.modelo.Pedido;
 import com.rosato.util.Navegador;
 import com.rosato.util.Sesion;
@@ -47,6 +49,7 @@ public class ConfirmacionPedidoController {
     private final DetallePedidoDAO detalleDAO = new DetallePedidoDAO();
     private final ClienteDAO clienteDAO = new ClienteDAO();
     private final PagoDAO pagoDAO = new PagoDAO();
+    private final EntregaDAO entregaDAO = new EntregaDAO();
 
     private Pedido pedido;
     private DetallePedido detalle;
@@ -141,6 +144,17 @@ public class ConfirmacionPedidoController {
                         ps.setBigDecimal(2, subtotal.subtract(adelanto));
                         ps.setInt(3, pedido.getIdPedido());
                         ps.executeUpdate();
+                    }
+                    // Crear la Entrega asociada al pedido confirmado.
+                    if (entregaDAO.porPedido(pedido.getIdPedido()).isEmpty()) {
+                        Entrega entrega = new Entrega();
+                        entrega.setFkIdPedido(pedido.getIdPedido());
+                        entrega.setTipoEntrega(pedido.getTipoEntrega() == null
+                                ? "Local" : pedido.getTipoEntrega());
+                        entrega.setDireccion(cliente == null ? null : cliente.getDireccion());
+                        entrega.setFechaProgramada(pedido.getFechaEntrega());
+                        entrega.setEstado("Pendiente");
+                        entregaDAO.insertar(conn, entrega);
                     }
                     conn.commit();
                 } catch (Exception ex) {

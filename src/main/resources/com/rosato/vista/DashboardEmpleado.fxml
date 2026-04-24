@@ -36,6 +36,7 @@
                 <Button text="Compras"       styleClass="btn-principal" onAction="#onCompras"/>
                 <Button text="Recetas"       styleClass="btn-principal" onAction="#onRecetas"/>
                 <Button text="Plan del día"  styleClass="btn-principal" onAction="#onPlanDia"/>
+                <Button text="Entregas"      styleClass="btn-principal" onAction="#onEntregas"/>
                 <Button text="Dashboard (pendiente)" styleClass="btn-secundario" disable="true"/>
             </FlowPane>
         </VBox>

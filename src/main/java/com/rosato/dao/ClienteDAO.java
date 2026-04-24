@@ -12,7 +12,7 @@ import java.util.Optional;
 public class ClienteDAO {
 
     public Optional<Cliente> porUsuario(String usuario) throws SQLException {
-        String sql = "SELECT * FROM Cliente WHERE usuario = ? AND activo = TRUE";
+        String sql = "SELECT * FROM Cliente WHERE usuario = ? AND activo = 1";
         try (Connection c = ConexionBD.get();
              PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setString(1, usuario);

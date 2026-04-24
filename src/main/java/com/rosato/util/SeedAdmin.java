@@ -34,7 +34,7 @@ public final class SeedAdmin {
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
                         try (PreparedStatement u = c.prepareStatement(
-                                "UPDATE Empleado SET contrasena = ?, activo = TRUE, " +
+                                "UPDATE Empleado SET contrasena = ?, activo = 1, " +
                                 "intentos_fallidos = 0, bloqueado_hasta = NULL WHERE id_empleado = ?")) {
                             u.setString(1, hash);
                             u.setInt(2, rs.getInt(1));
@@ -47,7 +47,7 @@ public final class SeedAdmin {
             }
             try (PreparedStatement ins = c.prepareStatement(
                     "INSERT INTO Empleado (nombre_completo, cedula, telefono, usuario, " +
-                    "contrasena, area_trabajo, activo) VALUES (?, ?, ?, ?, ?, ?, TRUE)")) {
+                    "contrasena, area_trabajo, activo) VALUES (?, ?, ?, ?, ?, ?, 1)")) {
                 ins.setString(1, "Administrador Rosato");
                 ins.setString(2, "000-0000000-0");
                 ins.setString(3, "8090000000");

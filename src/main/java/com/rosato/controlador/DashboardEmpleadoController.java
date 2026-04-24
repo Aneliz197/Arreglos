@@ -25,6 +25,7 @@ public class DashboardEmpleadoController {
     @FXML private void onCompras()      { ir("ListadoCompras.fxml"); }
     @FXML private void onRecetas()      { ir("ListadoRecetas.fxml"); }
     @FXML private void onPlanDia()      { ir("PlanDelDia.fxml"); }
+    @FXML private void onEntregas()     { ir("AgendaEntregas.fxml"); }
 
     @FXML
     private void onCerrarSesion() {

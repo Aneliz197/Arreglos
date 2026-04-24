@@ -8,8 +8,19 @@ import java.util.Optional;
 
 public class EmpleadoDAO {
 
+    public java.util.List<Empleado> listarActivos() throws SQLException {
+        java.util.List<Empleado> out = new java.util.ArrayList<>();
+        try (Connection c = ConexionBD.get();
+             PreparedStatement ps = c.prepareStatement(
+                     "SELECT * FROM Empleado WHERE activo = 1 ORDER BY nombre_completo");
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) out.add(mapear(rs));
+        }
+        return out;
+    }
+
     public Optional<Empleado> porUsuario(String usuario) throws SQLException {
-        String sql = "SELECT * FROM Empleado WHERE usuario = ? AND activo = TRUE";
+        String sql = "SELECT * FROM Empleado WHERE usuario = ? AND activo = 1";
         try (Connection c = ConexionBD.get();
              PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setString(1, usuario);

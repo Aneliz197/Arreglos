@@ -15,6 +15,11 @@ Este scaffolding cubre:
   confirmados y compara requerimientos contra stock, y transiciones de
   estado del pedido (`Confirmado → En producción → Listo`) con
   descuento automático de ingredientes al marcar listo.
+- **Módulo 5 (Entregas y Cobros)** — agenda de entregas por fecha y
+  estado, asignación de repartidor, transiciones
+  `Pendiente → En ruta → Entregada / Fallida`, y cobro del saldo final
+  (método + referencia) que registra el `Pago` y cambia el estado del
+  pedido a `Entregado` en una sola transacción.
 
 ## Stack
 
@@ -65,10 +70,13 @@ Este scaffolding cubre:
 | 3.1 Recetas         | `ListadoRecetas.fxml`      | `ListadoRecetasController`      |
 | 3.2 Editar receta   | `EditarReceta.fxml`        | `EditarRecetaController`        |
 | 3.3 Plan del día    | `PlanDelDia.fxml`          | `PlanDelDiaController`          |
+| 5.1 Agenda entregas | `AgendaEntregas.fxml`      | `AgendaEntregasController`      |
+| 5.2 Asignar repart. | `AsignarRepartidor.fxml`   | `AsignarRepartidorController`   |
+| 5.3 Entregar/cobrar | `EntregarYCobrar.fxml`     | `EntregarYCobrarController`     |
 | Dashboard cliente   | `DashboardCliente.fxml` | `DashboardClienteController`      |
 | Dashboard empleado  | `DashboardEmpleado.fxml`| `DashboardEmpleadoController`     |
 
-El resto de pantallas de la especificación (Módulos 5–10) se construirán
+El resto de pantallas de la especificación (Módulos 6–10) se construirán
 sobre esta base.
 
 ## Puesta en marcha
@@ -81,6 +89,7 @@ Con **SQL Server** (local o contenedor). Ejemplo con `sqlcmd`:
 sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulos_1_2.sql
 sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulo_4.sql
 sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulo_3.sql
+sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulo_5.sql
 ```
 
 O copiar el contenido de `sql/schema_modulos_1_2.sql` y ejecutarlo
