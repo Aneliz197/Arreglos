@@ -1,11 +1,11 @@
 -- =============================================================
 -- Repostería Rosato - Módulo 3: Recetas y Producción
 -- Dialecto: SQL Server (T-SQL)
--- Asume que la base 'reposteria_rosato' ya existe y que los
+-- Asume que la base 'Reposteria' ya existe y que los
 -- módulos 1-2 y 4 ya fueron aplicados (Ingrediente debe existir).
 -- =============================================================
 
-USE reposteria_rosato;
+USE Reposteria;
 GO
 
 CREATE TABLE Receta (

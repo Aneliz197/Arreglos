@@ -120,13 +120,13 @@ sobre esta base.
 Con **SQL Server** (local o contenedor). Ejemplo con `sqlcmd`:
 
 ```bash
-sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulos_1_2.sql
-sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulo_4.sql
-sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulo_3.sql
-sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulo_5.sql
-sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulo_6.sql
-sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulo_7.sql
-sqlcmd -S localhost -U sa -P "TuClave!" -i sql/schema_modulo_8.sql
+sqlcmd -S localhost -U AnelizEr -P "12345678" -i sql/schema_modulos_1_2.sql
+sqlcmd -S localhost -U AnelizEr -P "12345678" -d Reposteria -i sql/schema_modulo_4.sql
+sqlcmd -S localhost -U AnelizEr -P "12345678" -d Reposteria -i sql/schema_modulo_3.sql
+sqlcmd -S localhost -U AnelizEr -P "12345678" -d Reposteria -i sql/schema_modulo_5.sql
+sqlcmd -S localhost -U AnelizEr -P "12345678" -d Reposteria -i sql/schema_modulo_6.sql
+sqlcmd -S localhost -U AnelizEr -P "12345678" -d Reposteria -i sql/schema_modulo_7.sql
+sqlcmd -S localhost -U AnelizEr -P "12345678" -d Reposteria -i sql/schema_modulo_8.sql
 ```
 
 O copiar el contenido de `sql/schema_modulos_1_2.sql` y ejecutarlo
@@ -138,10 +138,17 @@ Edita `src/main/resources/com/rosato/config.properties` o exporta
 variables de entorno:
 
 ```bash
-export ROSATO_DB_URL="jdbc:sqlserver://localhost:1433;databaseName=reposteria_rosato;encrypt=false;trustServerCertificate=true"
-export ROSATO_DB_USER="sa"
-export ROSATO_DB_PASSWORD="TuClave!"
+export ROSATO_DB_URL="jdbc:sqlserver://localhost:1433;databaseName=Reposteria;encrypt=false;trustServerCertificate=true"
+export ROSATO_DB_USER="AnelizEr"
+export ROSATO_DB_PASSWORD="12345678"
 ```
+
+Valores por defecto en `config.properties`:
+
+- **Servidor:** `localhost:1433`
+- **Base de datos:** `Reposteria`
+- **Usuario:** `AnelizEr`
+- **Contraseña:** `12345678`
 
 ### 3. Crear el administrador
 
@@ -177,10 +184,10 @@ mvn -q test
 El proyecto usa **SQL Server** por defecto. Para cambiar:
 
 - **MySQL:** sustituir driver por `com.mysql:mysql-connector-j`,
-  URL `jdbc:mysql://HOST:3306/reposteria_rosato?useSSL=false&serverTimezone=UTC`
+  URL `jdbc:mysql://HOST:3306/Reposteria?useSSL=false&serverTimezone=UTC`
   y adaptar el esquema (`IDENTITY` → `AUTO_INCREMENT`, `BIT` → `BOOLEAN`,
   `SYSDATETIME()` → `CURRENT_TIMESTAMP`, `NVARCHAR(MAX)` → `TEXT`).
 - **PostgreSQL:** driver `org.postgresql:postgresql`,
-  URL `jdbc:postgresql://HOST:5432/reposteria_rosato`,
+  URL `jdbc:postgresql://HOST:5432/Reposteria`,
   y adaptar el esquema a tipos PostgreSQL (`SERIAL`, `BOOLEAN`,
   `TIMESTAMP`, etc.).

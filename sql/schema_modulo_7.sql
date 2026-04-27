@@ -5,7 +5,7 @@
 -- El alta/edición del propio Empleado usa la tabla ya existente.
 -- =============================================================
 
-USE reposteria_rosato;
+USE Reposteria;
 GO
 
 CREATE TABLE Capacitacion (

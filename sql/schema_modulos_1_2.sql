@@ -4,17 +4,11 @@
 -- Cubre: Autenticación (Cliente / Empleado) y Gestión de Pedidos.
 -- =============================================================
 
-IF DB_ID('reposteria_rosato') IS NOT NULL
-BEGIN
-    ALTER DATABASE reposteria_rosato SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-    DROP DATABASE reposteria_rosato;
-END;
+IF DB_ID('Reposteria') IS NULL
+    CREATE DATABASE Reposteria;
 GO
 
-CREATE DATABASE reposteria_rosato;
-GO
-
-USE reposteria_rosato;
+USE Reposteria;
 GO
 
 -- -------------------------------------------------------------

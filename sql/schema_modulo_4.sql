@@ -1,10 +1,10 @@
 -- =============================================================
 -- Repostería Rosato - Módulo 4: Inventario y Compras
 -- Dialecto: SQL Server (T-SQL)
--- Asume que la base 'reposteria_rosato' ya existe (schema_modulos_1_2.sql).
+-- Asume que la base 'Reposteria' ya existe (schema_modulos_1_2.sql).
 -- =============================================================
 
-USE reposteria_rosato;
+USE Reposteria;
 GO
 
 CREATE TABLE Ingrediente (

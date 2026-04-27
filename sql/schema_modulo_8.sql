@@ -4,7 +4,7 @@
 -- Asume que la base y los módulos 1-2 ya fueron aplicados.
 -- =============================================================
 
-USE reposteria_rosato;
+USE Reposteria;
 GO
 
 CREATE TABLE RevisionHigiene (
