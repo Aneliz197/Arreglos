@@ -1,7 +1,7 @@
 # Repostería Rosato
 
 Aplicación de escritorio JavaFX (FXML) para la gestión de la repostería.
-Este scaffolding cubre:
+Este hito cubre los **Módulos 1 al 8** sobre **SQL Server**:
 
 - **Módulo 1 (Autenticación)** — login, registro, bloqueo por intentos.
 - **Módulo 2 (Clientes y Pedidos)** — listado de clientes, nuevo pedido con
@@ -50,7 +50,13 @@ Este scaffolding cubre:
 .
 ├── pom.xml
 ├── sql/
-│   └── schema_modulos_1_2.sql        # Esquema MySQL (Módulos 1 y 2)
+│   ├── schema_modulos_1_2.sql        # Esquema base + Módulos 1 y 2
+│   ├── schema_modulo_4.sql           # Inventario y Compras
+│   ├── schema_modulo_3.sql           # Recetas y Producción
+│   ├── schema_modulo_5.sql           # Entregas y Cobros
+│   ├── schema_modulo_6.sql           # Máquinas y Mantenimiento
+│   ├── schema_modulo_7.sql           # Empleados y Capacitaciones
+│   └── schema_modulo_8.sql           # Higiene / Control sanitario
 └── src/
     ├── main/
     │   ├── java/com/rosato/

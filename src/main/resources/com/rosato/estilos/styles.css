@@ -47,6 +47,12 @@
     -fx-font-size: 12px;
 }
 
+.hint {
+    -fx-text-fill: #999;
+    -fx-font-size: 11px;
+    -fx-font-style: italic;
+}
+
 .tarjeta {
     -fx-background-color: white;
     -fx-background-radius: 10;
