@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.rosato.controlador.PlanDelDiaController"
+            prefWidth="1100" prefHeight="700" styleClass="root">
+
+    <top>
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <padding><Insets top="14" right="20" bottom="12" left="20"/></padding>
+            <Label text="Plan de producción" styleClass="titulo"/>
+            <HBox HBox.hgrow="ALWAYS"/>
+            <Label text="Fecha:"/>
+            <DatePicker fx:id="dpFecha"/>
+            <Button text="Cargar"   styleClass="btn-principal"  onAction="#onCargar"/>
+            <Button text="Volver"   styleClass="btn-secundario" onAction="#onVolver"/>
+        </HBox>
+    </top>
+
+    <center>
+        <SplitPane orientation="VERTICAL" dividerPositions="0.45">
+            <VBox spacing="8">
+                <padding><Insets top="8" right="14" bottom="8" left="14"/></padding>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Pedidos del día" styleClass="subtitulo"/>
+                    <HBox HBox.hgrow="ALWAYS"/>
+                    <Button text="Iniciar producción" styleClass="btn-secundario" onAction="#onIniciar"/>
+                    <Button text="Marcar como listo"  styleClass="btn-principal"  onAction="#onMarcarListo"/>
+                </HBox>
+                <TableView fx:id="tblPedidos" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colPedId"    text="ID"        prefWidth="60"/>
+                        <TableColumn fx:id="colHora"     text="Entrega"   prefWidth="120"/>
+                        <TableColumn fx:id="colCliente"  text="Cliente"   prefWidth="220"/>
+                        <TableColumn fx:id="colProducto" text="Producto"  prefWidth="260"/>
+                        <TableColumn fx:id="colLibras"   text="Libras"    prefWidth="100"/>
+                        <TableColumn fx:id="colEstado"   text="Estado"    prefWidth="140"/>
+                    </columns>
+                </TableView>
+            </VBox>
+
+            <VBox spacing="8">
+                <padding><Insets top="8" right="14" bottom="14" left="14"/></padding>
+                <Label text="Ingredientes requeridos vs stock" styleClass="subtitulo"/>
+                <Label fx:id="lblAlerta" styleClass="error" visible="false" managed="false" wrapText="true"/>
+                <TableView fx:id="tblRequerimientos" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colIng"        text="Ingrediente" prefWidth="280"/>
+                        <TableColumn fx:id="colReq"        text="Requerido"   prefWidth="120"/>
+                        <TableColumn fx:id="colDisp"       text="Disponible"  prefWidth="120"/>
+                        <TableColumn fx:id="colUniReq"     text="Unidad"      prefWidth="100"/>
+                        <TableColumn fx:id="colEstadoIng"  text="Estado"      prefWidth="200"/>
+                    </columns>
+                </TableView>
+            </VBox>
+        </SplitPane>
+    </center>
+</BorderPane>
