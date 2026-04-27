@@ -227,9 +227,8 @@ public class NuevoPedidoController {
         Integer idPedido = guardar("Pendiente verificación");
         if (idPedido != null) {
             try {
+                ConfirmacionPedidoController.setIdPedido(idPedido);
                 Navegador.ir("ConfirmacionPedido.fxml");
-                // Pasar el ID al siguiente controller vía propiedad estática simple.
-                com.rosato.controlador.ConfirmacionPedidoController.setIdPedido(idPedido);
             } catch (Exception ex) {
                 mostrarError("Pedido guardado (id " + idPedido + ") pero no se pudo abrir la confirmación: "
                         + ex.getMessage());
